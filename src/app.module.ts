@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity.js';
 import { join } from 'node:path';
+import { AuthenticationModule } from '@nestjs/authentication';
+import { UserModule } from './users/user.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 @Module({
   imports: [
@@ -18,9 +21,24 @@ import { join } from 'node:path';
 
       migrationsRun: false,
       migrationsTransactionMode: "all"
-    })
+    }),
+    AuthenticationModule.forRoot({
+      session: {
+        absoluteTtl: '14d',
+        idleTtl: '3d',
+        trustedOrigins: [
+          'http://localhost:4200',
+          'http://172.19.215.89:4200',
+        ],
+        cookie: {
+          secure: process.env.NODE_ENV === 'production',
+        },
+      },
+    }),
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

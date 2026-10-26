@@ -2,8 +2,6 @@ import { DataSource } from "typeorm";
 import { User } from "../users/user.entity.js";
 import { join } from "path";
 
-console.log(join(import.meta.dirname, "/src/database/migrations/**/*{.js,.ts}"));
-
 export default new DataSource({
   type: 'postgres',
   host: 'localhost',
@@ -13,7 +11,7 @@ export default new DataSource({
   database: 'book',
   entities: [User],
   synchronize: false,
-  migrations: [join(import.meta.dirname, "/src/database/migrations/*{.js,.ts}")],
+  migrations: [join(import.meta.dirname, "migrations/*{.js,.ts}")],
 
   migrationsRun: false,
   migrationsTransactionMode: "all"

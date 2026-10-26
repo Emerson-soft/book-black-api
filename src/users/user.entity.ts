@@ -12,11 +12,11 @@ export class User {
   @Column()
   email_verifield: boolean;
 
-  @Column()
+  @Column({ select: false })
   password: string
 
-  @Column()
-  created_at: string
+  @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
+  created_at: Date
 
   @Column()
   name: string

@@ -2,7 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Customer } from "./customer.entity.js";
 import { Repository } from "typeorm";
-import { ICreateCustomer } from "./customer.interface.js";
+import { ICreateCustomer, IFindCustomerParams } from "./customer.interface.js";
+import { User } from "../users/user.entity.js";
 
 @Injectable()
 export class CustomerRepository {
@@ -20,5 +21,17 @@ export class CustomerRepository {
 
     async updateCustomer(customer: Customer) {
         return this.repository.update(customer.id, customer);
+    }
+
+    async findAll(user: User): Promise<Customer[]> {
+        return this.repository.find({
+            where: {
+                user_id: user.id,
+            },
+            select: {
+                id: true,
+                name: true
+            }
+        })
     }
 }

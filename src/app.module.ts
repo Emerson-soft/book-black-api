@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { AuthenticationModule } from '@nestjs/authentication';
 import { UserModule } from './users/user.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { CustomerModule } from './customer/customer.module.js';
+import { Customer } from './customer/customer.entity.js';
 
 @Module({
   imports: [
@@ -15,7 +17,7 @@ import { AuthModule } from './auth/auth.module.js';
       username: 'admin',
       password: 'admin',
       database: 'book',
-      entities: [User],
+      entities: [User, Customer],
       synchronize: false,
       migrations: [join(import.meta.dirname, "/src/database/migrations/**/*{.js,.ts}")],
 
@@ -36,6 +38,7 @@ import { AuthModule } from './auth/auth.module.js';
       },
     }),
     UserModule,
+    CustomerModule,
     AuthModule
   ],
   controllers: [],

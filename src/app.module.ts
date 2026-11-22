@@ -7,6 +7,8 @@ import { UserModule } from './users/user.module.js';
 import { AuthModule } from './auth/auth.module.js';
 import { CustomerModule } from './customer/customer.module.js';
 import { Customer } from './customer/customer.entity.js';
+import { Movement } from './movement/movement.entity.js';
+import { MovementModule } from './movement/movement.module.js';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { Customer } from './customer/customer.entity.js';
       username: 'admin',
       password: 'admin',
       database: 'book',
-      entities: [User, Customer],
+      entities: [User, Customer, Movement],
       synchronize: false,
       migrations: [join(import.meta.dirname, "/src/database/migrations/**/*{.js,.ts}")],
 
@@ -39,6 +41,7 @@ import { Customer } from './customer/customer.entity.js';
     }),
     UserModule,
     CustomerModule,
+    MovementModule,
     AuthModule
   ],
   controllers: [],

@@ -26,8 +26,9 @@ export class UserRepository {
       ...user,
       email: this.normalizeEmail(user.email),
       email_verifield: false,
-      created_at: new Date().toUTCString()
-    })
+      created_at: new Date().toUTCString(),
+      role: user.role
+    }) // validar role TODO
   }
 
   async findById(id: number): Promise<User | null> {

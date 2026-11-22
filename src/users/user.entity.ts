@@ -23,4 +23,7 @@ export class User {
 
   @Column()
   company_name: string
+
+  @Column()
+  role: string
 }

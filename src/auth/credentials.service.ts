@@ -19,7 +19,7 @@ export class CredentialsService {
 
         return this.userRepository.create({
             ...payload,
-            password: await this.passwordHasher.hash(payload.password)
+            password: await this.passwordHasher.hash(payload.password),
         })
     }
 

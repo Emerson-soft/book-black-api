@@ -6,6 +6,7 @@ export const signUpSchema = z.object({
     password: z.string().min(8).max(255),
     name: z.string().min(3).max(100),
     company_name: z.string().min(3).max(100),
+    role: z.string()
 });
 export type SignUpDto = z.infer<typeof signUpSchema>;
 
